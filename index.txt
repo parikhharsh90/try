@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Family Poll</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+      text-align: center;
+      background: #f4f4f4;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 8px;
+      background: #007bff;
+      color: white;
+      font-size: 16px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h2>🏏 Family Poll</h2>
+    <p>Who will win today?</p>
+
+    <input type="text" id="name" placeholder="Enter your name">
+
+    <button onclick="vote('Team A')">Team A</button>
+    <button onclick="vote('Team B')">Team B</button>
+
+    <p id="msg"></p>
+  </div>
+
+<script>
+function vote(team) {
+  let name = document.getElementById("name").value;
+
+  if(name === "") {
+    alert("Enter your name");
+    return;
+  }
+
+  let votes = JSON.parse(localStorage.getItem("votes")) || [];
+  votes.push({name, team});
+
+  localStorage.setItem("votes", JSON.stringify(votes));
+
+  document.getElementById("msg").innerText =
+    "Vote submitted!";
+}
+</script>
+</body>
+</html>
